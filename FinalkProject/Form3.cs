@@ -32,7 +32,7 @@ namespace FinalkProject
             List<string> messages = FetchMessagesFromDatabase();
             foreach (var item in messages)
             {
-                string[] strings = item.Split("; ;; ;");
+                string[] strings = item.Split("; ;");
                 if (strings[1] == User && strings[2] == Receiver)
                 {
                     CreateMessageBox(strings[0], strings[1], strings[2], true, false);
@@ -43,7 +43,6 @@ namespace FinalkProject
 
                 }
             }
-            int asd = VisibleMessages.Count;
         }
 
         private void Form3_Load(object sender, EventArgs e)
@@ -69,7 +68,9 @@ namespace FinalkProject
                             cmd.Parameters.AddWithValue("@Sender", User + "; ;");
                             cmd.Parameters.AddWithValue("@Receiver", Receiver + "; ;");
                             cmd.Parameters.AddWithValue("@DateOfMessage", dateTime);
+                            this.AutoScroll = false;
                             CreateMessageBox(textBox1.Text, User, Receiver, true, false);
+                            this.AutoScroll = true;
                             cmd.ExecuteNonQuery();
                         }
                         MessageBox.Show("Data inserted successfully!");
@@ -120,7 +121,7 @@ namespace FinalkProject
             List<string> messages = new List<string>();
             foreach (var item in Messages)
             {
-                string[] asd = item.Split("; ;; ;");
+                string[] asd = item.Split("; ;");
                 if (asd[1] == User && asd[2] == Receiver)
                 {
                     messages.Add(item);
@@ -144,13 +145,12 @@ namespace FinalkProject
                 VisibleMessages.Clear();
                 foreach (var item in Messages)
                 {
-                    Messageheight = Messageheight;
-                    string[] strings = item.Split("; ;; ;");
-                    if (strings[2] == User)
+                    string[] strings = item.Split("; ;");
+                    if (strings[1] == User && strings[2] == Receiver)
                     {
                         CreateMessageBox(strings[0], strings[1], strings[2], true, false);
                     }
-                    if (strings[2] == Receiver)
+                    if (strings[1] == Receiver && strings[2] == User)
                     {
                         CreateMessageBox(strings[0], strings[1], strings[2], false, true);
                     }
@@ -176,9 +176,7 @@ namespace FinalkProject
                         {
                             while (reader.Read())
                             {
-                                
-                                   users.Add(reader.GetString("Message") + "; ;" + reader.GetString("Sender") + "; ;" + reader.GetString("Receiver") + "; ;" + reader.GetString("DateOfMessage") + "; ;");
-                                
+                                   users.Add(reader.GetString("Message")  + reader.GetString("Sender")  + reader.GetString("Receiver")  + reader.GetString("DateOfMessage") );
                             }
                         }
                     }
