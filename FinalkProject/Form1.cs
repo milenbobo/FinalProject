@@ -22,8 +22,6 @@ namespace FinalkProject
         public Form1()
         {
             InitializeComponent();
-
-            listBox1.DataSource = Users;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -97,12 +95,11 @@ namespace FinalkProject
                             cmd.Parameters.AddWithValue("@Password", password);
                             cmd.Parameters.AddWithValue("@Username", username );
                             cmd.ExecuteNonQuery();
+                            
                         }
                         List<string> Users = FetchUsersFromDatabase();
-                        listBox1.DataSource = Users;
-                        string[] asd = Users[1].Split(" ");
-                        RetrieveData();
-                        MessageBox.Show("Data inserted successfully!");
+                        MessageBox.Show("successful registration");
+
                         conn.Close();
 
                     }
@@ -197,7 +194,7 @@ namespace FinalkProject
             TextBox passwordtxt = (TextBox)Controls.Find("LoginPasswordBox", false).FirstOrDefault();
             TextBox emailtxt = (TextBox)Controls.Find("LoginEmailBox", false).FirstOrDefault();
             TextBox usernametxt = (TextBox)Controls.Find("LoginUsernameBox", false).FirstOrDefault();
-
+            List<string> Users = FetchUsersFromDatabase();
             foreach (var item in Users)
             {
                 string[] asd = item.Split(" ");
@@ -208,54 +205,6 @@ namespace FinalkProject
                     form2.ShowDialog();
                     this.Close();
                     break;
-                }
-            }
-        }
-        private void RetrieveData()
-        {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                try
-                {
-                    conn.Open();
-                    string query = "SELECT * FROM Users";
-                    MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    dataGridView1.DataSource = dt;
-                    conn.Close();
-                }
-                catch (MySqlException ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                }
-            }
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                try
-                {
-                    conn.Open();
-                    for (int i = 0; i < 10000; i++)
-                    {
-                        string query = "INSERT INTO Users (Email, Password, Username) VALUES (@Email, @Password, @Username)";
-                        using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                        {
-                            cmd.Parameters.AddWithValue("@Email", "test");
-                            cmd.Parameters.AddWithValue("@Password", "test");
-                            cmd.Parameters.AddWithValue("@Username", "test");
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
-                    
-                    MessageBox.Show("User inserted successfully!");
-                }
-                catch (MySqlException ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
                 }
             }
         }

@@ -16,8 +16,9 @@ namespace FinalkProject
 {
     public partial class Form3 : Form
     {
+        List<Label> remover = new List<Label> ();
         List<RichTextBox> VisibleMessages = new List<RichTextBox>(); 
-        int Messageheight = 10;
+        int Messageheight = 30;
         static private string connectionString = "Server=sql7.freesqldatabase.com;Port=3306;Database=sql7717504;User=sql7717504;Password=v4GgVVETDJ;";
         static string User = null;
         static string Receiver = null;
@@ -35,11 +36,11 @@ namespace FinalkProject
                 string[] strings = item.Split("; ;");
                 if (strings[1] == User && strings[2] == Receiver)
                 {
-                    CreateMessageBox(strings[0], strings[1], strings[2], true, false);
+                    CreateMessageBox(strings[0], strings[1], strings[2],strings[3], true, false);
                 }
                 if (strings[1] == Receiver && strings[2] == User)
                 {
-                    CreateMessageBox(strings[0], strings[1], strings[2], false, true);
+                    CreateMessageBox(strings[0], strings[1], strings[2], strings[3], false, true);
 
                 }
             }
@@ -67,9 +68,9 @@ namespace FinalkProject
                             cmd.Parameters.AddWithValue("@Message", textBox1.Text + "; ;");
                             cmd.Parameters.AddWithValue("@Sender", User + "; ;");
                             cmd.Parameters.AddWithValue("@Receiver", Receiver + "; ;");
-                            cmd.Parameters.AddWithValue("@DateOfMessage", dateTime);
+                            cmd.Parameters.AddWithValue("@DateOfMessage", dateTime.ToString());
                             this.AutoScroll = false;
-                            CreateMessageBox(textBox1.Text, User, Receiver, true, false);
+                            CreateMessageBox(textBox1.Text, User, Receiver, dateTime.ToString(),true, false);
                             this.AutoScroll = true;
                             cmd.ExecuteNonQuery();
                         }
@@ -85,7 +86,7 @@ namespace FinalkProject
                 }
             }
         }
-        public void CreateMessageBox(string message, string user, string receiver, bool userMessage, bool receiverMessage)
+        public void CreateMessageBox(string message, string user, string receiver, string dateTime, bool userMessage, bool receiverMessage)
         {
             if (userMessage)
             {
@@ -93,12 +94,21 @@ namespace FinalkProject
                 label.Text = message;
                 label.Location = new Point(500, Messageheight);
                 label.ReadOnly = true;
-                label.BackColor = Color.Gray;
-                label.Size = new Size(100,40 );
+                label.BackColor = Color.LightGray;
+                label.Size = new Size(200,60 );
                 Controls.Add(label);
-                Messageheight += 60;
+                Messageheight += 85;
                 VisibleMessages.Add(label);
-
+                Label person = new Label();
+                person.Text = user;
+                person.Location = label.Location;
+                person.Top -= 20;
+                Label Date = new Label();
+                Date.Text = dateTime.ToString();
+                Date.Location = person.Location;
+                Date.Left += person.Width + 10;
+                Controls.Add(person);
+                Controls.Add(Date);
             }
             if (receiverMessage)
             {
@@ -106,11 +116,21 @@ namespace FinalkProject
                 label.Text = message;
                 label.Location = new Point(80, Messageheight);
                 label.ReadOnly = true;
-                label.BackColor = Color.Gray;
-                label.Size = new Size(100,40 );
+                label.BackColor = Color.LightGray;
+                label.Size = new Size(200,60 );
                 Controls.Add(label);
-                Messageheight += 60;
+                Messageheight += 85;
                 VisibleMessages.Add(label);
+                Label person = new Label();
+                person.Text = receiver;
+                person.Location = label.Location;
+                person.Top -= 20;
+                Label Date = new Label();
+                Date.Text = dateTime.ToString();
+                Date.Location = person.Location;
+                Date.Left += person.Width + 10;
+                Controls.Add(person);
+                Controls.Add(Date);
             }
         }
 
@@ -133,7 +153,7 @@ namespace FinalkProject
             }
             if (messages.Count != VisibleMessages.Count)
             {            this.AutoScroll = false;
-                Messageheight = 10;
+                Messageheight = 30;
                 for (int i = VisibleMessages.Count - 1; i > 0; i--)
                 {
                     VisibleMessages[i].Visible = false;
@@ -148,11 +168,11 @@ namespace FinalkProject
                     string[] strings = item.Split("; ;");
                     if (strings[1] == User && strings[2] == Receiver)
                     {
-                        CreateMessageBox(strings[0], strings[1], strings[2], true, false);
+                        CreateMessageBox(strings[0], strings[1], strings[2], strings[3], true, false);
                     }
                     if (strings[1] == Receiver && strings[2] == User)
                     {
-                        CreateMessageBox(strings[0], strings[1], strings[2], false, true);
+                        CreateMessageBox(strings[0], strings[1], strings[2], strings[3], false, true);
                     }
                 }this.AutoScroll = true;
             }

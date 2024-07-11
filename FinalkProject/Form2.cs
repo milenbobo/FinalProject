@@ -46,14 +46,9 @@ namespace FinalkProject
                 }
             }
         }
-        
+
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             var cellValue = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
             if (user == cellValue)
@@ -67,6 +62,11 @@ namespace FinalkProject
                 form.ShowDialog();
                 this.Close();
             }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
             
         }
     }

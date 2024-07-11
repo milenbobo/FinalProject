@@ -40,9 +40,6 @@
             usernameerror3 = new Label();
             usernameerror1 = new Label();
             usernameerror4 = new Label();
-            dataGridView1 = new DataGridView();
-            listBox1 = new ListBox();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // register
@@ -166,33 +163,11 @@
             usernameerror4.Text = "not a unique name";
             usernameerror4.Visible = false;
             // 
-            // dataGridView1
-            // 
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(54, 431);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(240, 150);
-            dataGridView1.TabIndex = 12;
-            // 
-            // listBox1
-            // 
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 15;
-            listBox1.Location = new Point(492, 365);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(552, 274);
-            listBox1.TabIndex = 13;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1452, 690);
-            Controls.Add(listBox1);
-            Controls.Add(dataGridView1);
             Controls.Add(usernameerror4);
             Controls.Add(usernameerror2);
             Controls.Add(usernameerror3);
@@ -207,7 +182,6 @@
             Controls.Add(register);
             Name = "Form1";
             Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -226,7 +200,5 @@
         private Label usernameerror3;
         private Label usernameerror1;
         private Label usernameerror4;
-        private DataGridView dataGridView1;
-        private ListBox listBox1;
     }
 }
