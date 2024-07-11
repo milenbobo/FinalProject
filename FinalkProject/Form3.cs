@@ -109,6 +109,8 @@ namespace FinalkProject
                 Date.Left += person.Width + 10;
                 Controls.Add(person);
                 Controls.Add(Date);
+                remover.Add(person);
+                remover.Add(Date);
             }
             if (receiverMessage)
             {
@@ -131,6 +133,8 @@ namespace FinalkProject
                 Date.Left += person.Width + 10;
                 Controls.Add(person);
                 Controls.Add(Date);
+                remover.Add(person);
+                remover.Add(Date);
             }
         }
 
@@ -139,6 +143,7 @@ namespace FinalkProject
 
             List<string> Messages = FetchMessagesFromDatabase();
             List<string> messages = new List<string>();
+            
             foreach (var item in Messages)
             {
                 string[] asd = item.Split("; ;");
@@ -154,6 +159,14 @@ namespace FinalkProject
             if (messages.Count != VisibleMessages.Count)
             {            this.AutoScroll = false;
                 Messageheight = 30;
+                foreach (var item in remover)
+                {
+                    item.Visible = false;
+                    item.Enabled = false;
+                    Controls.Remove(item);
+                    item.Dispose();
+                }
+                remover.Clear();
                 for (int i = VisibleMessages.Count - 1; i > 0; i--)
                 {
                     VisibleMessages[i].Visible = false;

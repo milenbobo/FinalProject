@@ -27,6 +27,7 @@ namespace FinalkProject
         private void button1_Click(object sender, EventArgs e)
         {
             Label registerPassword = new Label();
+            registerPassword.Name = "password";
             registerPassword.Location = new Point(register.Left + 150, register.Top);
             registerPassword.Text = "password";
             registerPassword.AutoSize = true;
@@ -38,6 +39,7 @@ namespace FinalkProject
             Controls.Add(RegisterPasswordBox);
 
             Label registerEmail = new Label();
+            registerEmail.Name = "email";
             registerEmail.Location = new Point(registerPassword.Left, register.Top + 50);
             registerEmail.Text = "email";
             registerEmail.AutoSize = true;
@@ -49,6 +51,7 @@ namespace FinalkProject
             Controls.Add(RegisterEmailBox);
 
             Label registerUsername = new Label();
+            registerUsername.Name = "username";
             registerUsername.Location = new Point(registerEmail.Left, register.Top + 100);
             registerUsername.Text = "username";
             registerUsername.AutoSize = true;
@@ -60,6 +63,7 @@ namespace FinalkProject
             Controls.Add(RegisterUsernameBox);
 
             Button button = new Button();
+            button.Name = "RegisterButton";
             button.Location = new Point(RegisterUsernameBox.Right + 50, register.Top + 50);
             button.AutoSize = true;
             button.Text = "click to register your account";
@@ -108,6 +112,45 @@ namespace FinalkProject
                         MessageBox.Show("Error: " + ex.Message);
                     }
                 }
+                RegisterPasswordBox.Visible = false;
+                RegisterPasswordBox.Enabled = false;
+                Controls.Remove(RegisterPasswordBox);
+                RegisterPasswordBox.Dispose(); 
+                RegisterPasswordBox = null;
+                RegisterEmailBox.Visible = false;
+                RegisterEmailBox.Enabled = false;
+                Controls.Remove(RegisterEmailBox);
+                RegisterEmailBox.Dispose();
+                RegisterEmailBox = null;
+                RegisterUsernameBox.Visible = false;
+                RegisterUsernameBox.Enabled = false;
+                Controls.Remove(RegisterUsernameBox);
+                RegisterUsernameBox.Dispose();
+                RegisterUsernameBox = null;
+                Label RegisterPasswordLabel = (Label)Controls.Find("password", false).FirstOrDefault();
+                Label EmailPasswordLabel = (Label)Controls.Find("email", false).FirstOrDefault();
+                Label UsernamePasswordLabel = (Label)Controls.Find("username", false).FirstOrDefault();
+                Button RegisterButton = (Button)Controls.Find("RegisterButton", false).FirstOrDefault();
+                RegisterPasswordLabel.Visible = false;
+                RegisterPasswordLabel.Enabled = false;
+                Controls.Remove(RegisterPasswordLabel);
+                RegisterPasswordLabel.Dispose();
+                RegisterPasswordLabel = null;
+                EmailPasswordLabel.Visible = false;
+                EmailPasswordLabel.Enabled = false;
+                Controls.Remove(EmailPasswordLabel);
+                EmailPasswordLabel.Dispose();
+                EmailPasswordLabel = null;
+                UsernamePasswordLabel.Visible = false;
+                UsernamePasswordLabel.Enabled = false;
+                Controls.Remove(UsernamePasswordLabel);
+                UsernamePasswordLabel.Dispose();
+                UsernamePasswordLabel = null;
+                RegisterButton.Visible = false;
+                RegisterButton.Enabled = false;
+                Controls.Remove(RegisterButton);
+                RegisterButton.Dispose();
+                RegisterButton = null;
             }
             catch (Exception ex)
             {
